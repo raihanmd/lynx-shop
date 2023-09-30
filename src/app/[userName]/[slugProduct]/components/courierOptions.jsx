@@ -65,8 +65,16 @@ export default function CourierOptions({ couriers }) {
           <Text fontWeight={"bold"}>Same Day</Text>
           <UnorderedList paddingLeft={"5"} ringColor={"gray.300"}>
             {sameDay.map((item, i) => (
-              <ListItem>
-                {item.company} - {item.description}
+              <ListItem key={i}>
+                <Flex justify={"space-between"}>
+                  <Text>
+                    {item.company} - {item.description}
+                  </Text>
+                  <Text>{toRupiah(item.cost[0].value, { formal: false, symbol: "IDR" })}</Text>
+                </Flex>
+                <Text color={"gray.400"} fontSize={"md"}>
+                  Estimated delivery {item.cost[0].etd.split(" ")[0] + " day"}
+                </Text>
               </ListItem>
             ))}
           </UnorderedList>
