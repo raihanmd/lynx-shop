@@ -1,0 +1,40 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap"); */
+@import url("https://fonts.cdnfonts.com/css/open-sauce-one");
+
+h4,
+h5,
+h6,
+p {
+  font-family: "Open Sauce One", sans-serif;
+}
+
+main.root {
+  padding: 10px 0px;
+  max-width: var(--chakra-sizes-7xl);
+  margin: 0 auto;
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: var(--chakra-colors-black);
+  padding: 8px 13px;
+  border-radius: var(--chakra-radii-md);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: var(--chakra-colors-gray-900);
+}
+
+.card-product {
+  flex: none;
+}
+
+@media screen and (max-width: 480px) {
+  .card-product {
+    flex: 1 1 160px;
+  }
+}
