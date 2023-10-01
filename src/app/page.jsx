@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import ProductCard from "@/app/components/productCard";
-import { fetchGET } from "@/useFetch/fetchGET";
+import { fetchGET } from "@/utils/fetchGET";
 import LoadingProduct from "./components/loadingProduct";
 
 export default async function page() {

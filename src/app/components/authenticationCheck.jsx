@@ -1,7 +1,7 @@
 import slugify from "slugify";
 import { getServerSession } from "next-auth";
 
-import { fetchGET } from "@/useFetch/fetchGET";
+import { fetchGET } from "@/utils/fetchGET";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { UserProvider } from "@/context/UserContext";
 import { CategoriesProvider } from "@/context/CategoriesContext";

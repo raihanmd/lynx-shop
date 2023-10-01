@@ -6,8 +6,8 @@ import { redirect } from "next/navigation";
 import { Stack, FormControl, FormLabel, Select, Button, Flex, Box, useToast, Alert, AlertIcon, AlertTitle, Textarea } from "@chakra-ui/react";
 
 import { useUserContext } from "@/context/UserContext";
-import { fetchGET } from "@/useFetch/fetchGET";
-import { fetchPOST } from "@/useFetch/fetchPOST";
+import { fetchGET } from "@/utils/fetchGET";
+import { fetchPOST } from "@/utils/fetchPOST";
 
 export default function page() {
   const user = useUserContext();

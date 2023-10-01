@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
-import { fetchGET } from "@/useFetch/fetchGET";
+import { fetchGET } from "@/utils/fetchGET";
 import BreadcumbComponent from "../components/breadcumb";
 import LoadingUserPage from "./loading";
 import UserBanner from "./components/userBanner";

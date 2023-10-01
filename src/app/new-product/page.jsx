@@ -8,7 +8,7 @@ import { AiOutlineFileImage } from "react-icons/ai";
 import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, Text, useToast, Alert, AlertIcon, AlertTitle, Select, VisuallyHidden, Icon, chakra, Textarea } from "@chakra-ui/react";
 
 import ProductCard from "@/app/components/productCard";
-import { fetchPOST } from "@/useFetch/fetchPOST";
+import { fetchPOST } from "@/utils/fetchPOST";
 import { uploadImage } from "@/firebase/uploadImage";
 import { getImageURL } from "@/firebase/getImageURL";
 import { deleteImage } from "@/firebase/deleteImage";

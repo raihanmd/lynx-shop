@@ -1,12 +1,12 @@
 "use client";
 
-import { Flex, Box, Badge, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import toRupiah from "@develoka/angka-rupiah-js";
+import { Flex, Box, Badge, Text } from "@chakra-ui/react";
+import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 
-import { productIsNew } from "@/utils/productIsNew";
 import BlurImage from "./blurImage";
+import { productIsNew } from "@/utils/productIsNew";
 
 function Rating({ rating }) {
   return (

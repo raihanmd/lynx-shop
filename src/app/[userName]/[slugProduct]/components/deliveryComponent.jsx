@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import toRupiah from "@develoka/angka-rupiah-js";
+import { useState, useEffect } from "react";
 import { Box, Flex, Heading, Icon, Text } from "@chakra-ui/react";
 import { FaShippingFast } from "react-icons/fa";
 import { SlLocationPin } from "react-icons/sl";
-import toRupiah from "@develoka/angka-rupiah-js";
 
-import { fetchPOST } from "@/useFetch/fetchPOST";
 import PostageModal from "./postageModal";
+import { fetchPOST } from "@/utils/fetchPOST";
 
 export const DeliveryComponent = ({ city, origin, destination, weight }) => {
   const [postage, setPostage] = useState(null);
