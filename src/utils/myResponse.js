@@ -18,6 +18,7 @@ export const myResponse = (statusCode, payload, message) => {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
         "Cache-Control": "public, s-maxage=10, stale-while-revalidate=59",
+        "Content-Type": "application/json"
       },
     }
   );
