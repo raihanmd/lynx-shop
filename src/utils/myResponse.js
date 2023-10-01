@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
 export const myResponse = (statusCode, payload, message) => {
+  if (typeof payload === "string") {
+    payload = JSON.parse(payload);
+  }
+
   return NextResponse.json(
     {
       statusCode,
@@ -18,7 +22,7 @@ export const myResponse = (statusCode, payload, message) => {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
         "Cache-Control": "public, s-maxage=10, stale-while-revalidate=59",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     }
   );
