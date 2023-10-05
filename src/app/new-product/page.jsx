@@ -20,8 +20,6 @@ export default function page() {
   const categories = useCategoriesContext();
   const user = useUserContext();
 
-  console.log(user);
-  
   if (!user) return redirect("/api/auth/signin");
 
   const toast = useToast();

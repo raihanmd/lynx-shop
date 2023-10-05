@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { BiLogOut } from "react-icons/bi";
 import { signOut } from "next-auth/react";
 import { VscAccount } from "react-icons/vsc";
@@ -16,6 +15,7 @@ import logoBrand from "@/images/lynxshop.webp";
 import DesktopNav from "./desktopNav";
 import { useUserContext } from "@/context/UserContext";
 import color from "@/const/color";
+import { Link } from "@chakra-ui/next-js";
 
 const searchProduct = (product) => {
   console.log(product);
@@ -84,17 +84,22 @@ export default function MyNavbar() {
               <Avatar size={"sm"} src={user.image} alt={`Picture of ${user.name}`} />
             </MenuButton>
             <MenuList color={"black"}>
-              <MenuItem as={Link} href={user.city ? "/new-product" : "/verification"} _hover={{ background: `${color.MAIN_COLOR}.50` }} _focus={{ background: `${color.MAIN_COLOR}.50` }}>
-                <Flex w={"full"} justify={"space-between"} align={"center"}>
-                  {user.city ? "Add Product" : "Verify My Account"} <Icon fontSize={"lg"} as={user.city ? GrAddCircle : MdOutlineVerified} />
-                </Flex>
+              <MenuItem _hover={{ background: `${color.MAIN_COLOR}.50` }} _focus={{ background: `${color.MAIN_COLOR}.50` }}>
+                <Link w={"full"} href={user.city ? "/new-product" : "/verification"} _hover={{ textDecoration: "none" }}>
+                  <Flex w={"full"} justify={"space-between"} align={"center"}>
+                    <Text textDecor={"none"}>{user.city ? "Add Product" : "Verify My Account"}</Text>
+                    <Icon fontSize={"lg"} as={user.city ? GrAddCircle : MdOutlineVerified} />
+                  </Flex>
+                </Link>
               </MenuItem>
               {MENU_ITEM.map((item) => (
-                <MenuItem key={item.key} as={Link} href={item.href} _hover={{ background: `${color.MAIN_COLOR}.50` }}>
-                  <Flex w={"full"} justify={"space-between"} align={"center"}>
-                    {item.label}
-                    <Icon fontSize={"lg"} as={item.icon} />
-                  </Flex>
+                <MenuItem key={item.key} _hover={{ background: `${color.MAIN_COLOR}.50` }}>
+                  <Link w={"full"} href={item.href} _hover={{ textDecoration: "none" }}>
+                    <Flex w={"full"} justify={"space-between"} align={"center"}>
+                      <Text textDecor={"none"}>{item.label}</Text>
+                      <Icon fontSize={"lg"} as={item.icon} />
+                    </Flex>
+                  </Link>
                 </MenuItem>
               ))}
               <MenuDivider />
