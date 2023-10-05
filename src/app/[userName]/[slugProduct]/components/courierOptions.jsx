@@ -59,7 +59,7 @@ export default function CourierOptions({ couriers }) {
   }, [couriers]);
 
   return (
-    <Flex direction={"column"} gap={"5"} w="full">
+    <Flex direction={"column"} gap={"5"} w="full" fontSize={{ base: "sm", md: "md" }}>
       {sameDay.length > 0 && (
         <Container>
           <Text fontWeight={"bold"}>Same Day</Text>
@@ -72,7 +72,7 @@ export default function CourierOptions({ couriers }) {
                   </Text>
                   <Text>{toRupiah(item.cost[0].value, { formal: false, symbol: "IDR" })}</Text>
                 </Flex>
-                <Text color={"gray.400"} fontSize={"md"}>
+                <Text color={"gray.400"} fontSize={"10px"}>
                   Estimated delivery {item.cost[0].etd.split(" ")[0] + " day"}
                 </Text>
               </ListItem>

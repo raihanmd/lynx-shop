@@ -49,13 +49,13 @@ export const DeliveryComponent = ({ city, origin, destination, weight }) => {
         </Flex>
         <Flex gap={"2"} align={"baseline"}>
           <Icon as={FaShippingFast} transform={"translateY(2px)"} />
-          <Box w={"full"}>
-            <Text>Postage Regular {regulerPrice ? toRupiah(regulerPrice, { k: true, floatingPoint: 0, useUnit: true, symbol: null }) : "....."}</Text>
-            <Flex justify={"space-between"} w={"full"}>
-              <Text color={"gray.500"}>Estimated delivery {etd + " day"}</Text>
+          <Flex w={"full"} direction={"column"}>
+            <Text>Postage Regular {regulerPrice ? toRupiah(regulerPrice, { formal: false, symbol: "IDR" }) : "....."}</Text>
+            <Flex justify={{ sm: "space-between" }} w={"full"} direction={{ base: "column", sm: "row" }}>
+              <Text color={"gray.500"}>Etd delivery {etd + " day"}</Text>
               <PostageModal postage={postage} weight={weight} city={city} isLoading={loading} />
             </Flex>
-          </Box>
+          </Flex>
         </Flex>
       </Flex>
     </Box>

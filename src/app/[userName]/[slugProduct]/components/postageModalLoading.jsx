@@ -5,7 +5,7 @@ import { Flex, Skeleton } from "@chakra-ui/react";
 export default function PostageModalLoaing() {
   return (
     <>
-      <Flex w={"auto"} gap={"8"}>
+      <Flex w={"auto"} gap={"8"} direction={{ base: "column", md: "row" }}>
         <Flex direction={"column"} border={"1px"} borderColor={"gray.300"} rounded={"md"} minW={"64"} h={"full"} p={"5"}>
           <Flex direction={"column"} gap={"4"}>
             <Flex direction={"column"} gap={"2"}>

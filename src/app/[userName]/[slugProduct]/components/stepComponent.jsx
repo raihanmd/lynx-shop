@@ -33,7 +33,7 @@ export function StepComponent({ city, weight }) {
   ];
 
   return (
-    <Flex direction={"column"} border={"1px"} borderColor={"gray.300"} rounded={"md"} minW={"64"} h={"full"} p={"5"}>
+    <Flex direction={"column"} border={"1px"} borderColor={"gray.300"} rounded={"md"} minW={{ base: "full", md: "64" }} h={"full"} p={"5"}>
       <Flex direction={"column"} gap={"4"}>
         <Flex direction={"column"}>
           <Text fontSize={"sm"}>Weight Product</Text>

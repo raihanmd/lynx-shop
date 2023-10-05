@@ -14,7 +14,7 @@ export default function PostageModal({ postage, weight, city, isLoading }) {
 
   return (
     <>
-      <Text ref={finalRef} onClick={onOpen} color={`${color.MAIN_COLOR}.500`} fontWeight={"semibold"} fontSize={"md"} _hover={{ textDecor: "underline", cursor: "pointer" }}>
+      <Text ref={finalRef} onClick={onOpen} color={`${color.MAIN_COLOR}.500`} fontWeight={"semibold"} fontSize={"md"} textAlign={{ md: "right" }} _hover={{ textDecor: "underline", cursor: "pointer" }}>
         Courier options
       </Text>
       <Modal size={"3xl"} finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose} isCentered>
@@ -34,7 +34,7 @@ export default function PostageModal({ postage, weight, city, isLoading }) {
             {isLoading ? (
               <PostageModalLoaing />
             ) : (
-              <Flex w={"auto"} gap={"8"}>
+              <Flex w={"auto"} gap={"8"} direction={{ base: "column", md: "row" }} justify={"center"}>
                 <StepComponent city={city} weight={weight} />
                 <CourierOptions couriers={postage} />
               </Flex>
