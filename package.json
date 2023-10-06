@@ -16,6 +16,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@fontsource/open-sauce-one": "^5.0.7",
+    "axios": "^1.5.1",
     "bcrypt": "^5.1.0",
     "blurhash": "^2.0.5",
     "encoding": "^0.1.13",
