@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import unslugify from "@/utils/unslugify";
 import { usePathname } from "next/navigation";
 import { ChevronRightIcon } from "@chakra-ui/icons";
@@ -8,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Breadcrumb, BreadcrumbItem, Text } from "@chakra-ui/react";
 
 import color from "@/const/color";
+import { Link } from "@chakra-ui/next-js";
 
 export default function BreadcumbComponent() {
   const pathname = usePathname();
@@ -50,9 +50,9 @@ export default function BreadcumbComponent() {
     <div ref={breadcrumbContainerRef}>
       <Breadcrumb spacing="1" separator={<ChevronRightIcon color="gray.500" />} fontWeight="thin" px={2}>
         <BreadcrumbItem>
-          <Text as={Link} href={"/"} _hover={{ textDecoration: "underline" }} color={`${color.MAIN_COLOR}.500`} fontWeight={"medium"}>
+          <Link prefetch={false} href={"/"} _hover={{ textDecoration: "underline" }} color={`${color.MAIN_COLOR}.500`} fontWeight={"medium"}>
             Home
-          </Text>
+          </Link>
         </BreadcrumbItem>
         {filteredPath.map((path, index) => {
           const isLastItem = index === filteredPath.length - 1;
@@ -69,7 +69,13 @@ export default function BreadcumbComponent() {
                 color={isLastItem ? "black" : `${color.MAIN_COLOR}.500`}
                 _hover={{ textDecoration: isLastItem ? "none" : "underline" }}
               >
-                {isLastItem ? unslugify(path) : <Link href={`/${path}`}>{unslugify(path)}</Link>}
+                {isLastItem ? (
+                  unslugify(path)
+                ) : (
+                  <Link href={`/${path}`} prefetch={false}>
+                    {unslugify(path)}
+                  </Link>
+                )}
               </Text>
             </BreadcrumbItem>
           );
