@@ -35,10 +35,10 @@ export default function MyNavbar() {
     <Box boxShadow={"md"} position={"sticky"} top={"0"} zIndex={"100"}>
       <Flex bg={"white"} mx={"auto"} color={"white"} minH={"60px"} py={{ base: 4 }} px={{ base: 4, md: 20 }} borderBottom={1} borderStyle={"solid"} borderColor={"gray.200"} align={"center"}>
         <Flex justify={"space-between"} align={"center"} width={"full"} pr={4} gap={2}>
-          <Link href={"/"}>
+          <Link href={"/"} prefetch={false}>
             <Image src={logoBrand} alt={"Logo brand"} width={40} height={40} />
           </Link>
-          <Link href={"/"}>
+          <Link href={"/"} prefetch={false}>
             <Text textAlign={{ base: "center", md: "left" }} fontFamily={"heading"} color={"black"} display={{ base: "none", md: "inline" }} fontWeight={700}>
               LynxShop
             </Text>
