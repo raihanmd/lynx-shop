@@ -85,7 +85,7 @@ export default function MyNavbar() {
             </MenuButton>
             <MenuList color={"black"}>
               <MenuItem _hover={{ background: `${color.MAIN_COLOR}.50` }} _focus={{ background: `${color.MAIN_COLOR}.50` }}>
-                <Link w={"full"} href={user.city ? "/new-product" : "/verification"} _hover={{ textDecoration: "none" }}>
+                <Link w={"full"} href={user.city ? "/new-product" : "/verification"} _hover={{ textDecoration: "none" }} prefetch={false}>
                   <Flex w={"full"} justify={"space-between"} align={"center"}>
                     <Text textDecor={"none"}>{user.city ? "Add Product" : "Verify My Account"}</Text>
                     <Icon fontSize={"lg"} as={user.city ? GrAddCircle : MdOutlineVerified} />
@@ -94,7 +94,7 @@ export default function MyNavbar() {
               </MenuItem>
               {MENU_ITEM.map((item) => (
                 <MenuItem key={item.key} _hover={{ background: `${color.MAIN_COLOR}.50` }}>
-                  <Link w={"full"} href={item.href} _hover={{ textDecoration: "none" }}>
+                  <Link w={"full"} href={item.href} _hover={{ textDecoration: "none" }} prefetch={false}>
                     <Flex w={"full"} justify={"space-between"} align={"center"}>
                       <Text textDecor={"none"}>{item.label}</Text>
                       <Icon fontSize={"lg"} as={item.icon} />

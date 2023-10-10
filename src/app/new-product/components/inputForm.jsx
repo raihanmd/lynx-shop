@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { redirect } from "next/navigation";
 import { MdDelete } from "react-icons/md";
 import { AiOutlineFileImage } from "react-icons/ai";
 import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, Text, useToast, Alert, AlertIcon, AlertTitle, Select, VisuallyHidden, Icon, chakra, Textarea } from "@chakra-ui/react";
@@ -12,15 +11,11 @@ import { fetchPOST } from "@/utils/fetchPOST";
 import { uploadImage } from "@/firebase/uploadImage";
 import { getImageURL } from "@/firebase/getImageURL";
 import { deleteImage } from "@/firebase/deleteImage";
-import { useUserContext } from "@/context/UserContext";
 import { generateImageName } from "@/utils/generateImageName";
 import { useCategoriesContext } from "@/context/CategoriesContext";
 
-export default function InputForm() {
+export default function inputFork() {
   const categories = useCategoriesContext();
-  const user = useUserContext();
-
-  if (!user) return redirect("/api/auth/signin");
 
   const toast = useToast();
 
