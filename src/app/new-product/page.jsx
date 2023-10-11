@@ -11,11 +11,13 @@ import { fetchPOST } from "@/utils/fetchPOST";
 import { uploadImage } from "@/firebase/uploadImage";
 import { getImageURL } from "@/firebase/getImageURL";
 import { deleteImage } from "@/firebase/deleteImage";
+import { useUserContext } from "@/context/UserContext";
 import { generateImageName } from "@/utils/generateImageName";
 import { useCategoriesContext } from "@/context/CategoriesContext";
 
 export default function page() {
   const categories = useCategoriesContext();
+  const user = useUserContext();
 
   const toast = useToast();
 
@@ -60,6 +62,7 @@ export default function page() {
       if (statusCode !== 200) throw new Error();
       toast({
         title: "Product added successfully.",
+        description: "Developer said: 'Wow thats an epic product!'.",
         position: "top-right",
         status: "success",
         isClosable: true,
@@ -72,8 +75,10 @@ export default function page() {
 
       return (window.location.href = "/");
     } catch (err) {
+      console.log(err);
       toast({
         title: "Product added failed.",
+        description: "Something went wrong, please try again later.",
         position: "top-right",
         status: "error",
         isClosable: true,
@@ -100,6 +105,7 @@ export default function page() {
                 <FormLabel>Name Product</FormLabel>
                 <Input
                   {...register("name")}
+                  disabled={isLoading}
                   type="text"
                   name="name"
                   value={previewProductName}
@@ -114,11 +120,11 @@ export default function page() {
               </FormControl>
               <FormControl id="description" isRequired>
                 <FormLabel>Description Product</FormLabel>
-                <Textarea {...register("desc")} type="text" name="desc" maxLength={65535} />
+                <Textarea {...register("desc")} disabled={isLoading} type="text" name="desc" maxLength={65535} />
               </FormControl>
               <FormControl id="category" isRequired>
                 <FormLabel>Category Product</FormLabel>
-                <Select {...register("cat")} placeholder="Select Category" name="cat">
+                <Select {...register("cat")} disabled={isLoading} placeholder="Select Category" name="cat">
                   {categories.map((category) => (
                     <option value={category.name}>{category.name}</option>
                   ))}
@@ -126,15 +132,15 @@ export default function page() {
               </FormControl>
               <FormControl id="price" isRequired>
                 <FormLabel>Price Product</FormLabel>
-                <Input {...register("price")} type="number" name="price" value={previewProductPrice} onChange={(e) => setPreviewProductPrice(parseFloat(e.target.value))} max={999999999999999999} />
+                <Input {...register("price")} disabled={isLoading} type="number" name="price" value={previewProductPrice} onChange={(e) => setPreviewProductPrice(parseFloat(e.target.value))} max={999999999999999999} />
               </FormControl>
               <FormControl id="quantity" isRequired>
                 <FormLabel>Quantity Product</FormLabel>
-                <Input {...register("qty")} type="number" name="qty" max={999999999} />
+                <Input {...register("qty")} disabled={isLoading} type="number" name="qty" max={999999999} />
               </FormControl>
               <FormControl id="quantity" isRequired>
                 <FormLabel>Weight Product</FormLabel>
-                <Input {...register("weight")} type="number" name="weight" max={999999999} />
+                <Input {...register("weight")} disabled={isLoading} type="number" name="weight" max={999999999} />
               </FormControl>
 
               <FormControl w={{ sm: "350px", md: "430px" }} id="image" isRequired>
@@ -173,6 +179,7 @@ export default function page() {
                         </Text>
                         <VisuallyHidden>
                           <Input
+                            disabled={isLoading}
                             id="image"
                             name="image"
                             type="file"
@@ -183,6 +190,7 @@ export default function page() {
                                 if (files[0].size > 1000000) {
                                   return toast({
                                     title: "Image size too big.",
+                                    description: "Sorry the developer doesn't want to spend money, so he selected a hobby plan with modest specs.",
                                     position: "top-right",
                                     status: "error",
                                     isClosable: true,
