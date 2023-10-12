@@ -6,7 +6,7 @@ import { BsHeart } from "react-icons/bs";
 function LoadingProductDetail() {
   return (
     <>
-      <Flex w={"full"}>
+      <Flex w={"full"} px={"4"}>
         <Flex gap={"2"} height={"5"}>
           <Skeleton width={"auto"}>
             <Box>Home</Box>

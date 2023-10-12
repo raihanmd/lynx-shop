@@ -72,7 +72,7 @@ export default function CourierOptions({ couriers }) {
                   </Text>
                   <Text>{toRupiah(item.cost[0].value, { formal: false, symbol: "IDR" })}</Text>
                 </Flex>
-                <Text color={"gray.400"} fontSize={"10px"}>
+                <Text color={"gray.400"} fontSize={"md"}>
                   Estimated delivery {item.cost[0].etd.split(" ")[0] + " day"}
                 </Text>
               </ListItem>

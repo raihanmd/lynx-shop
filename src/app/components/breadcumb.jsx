@@ -48,7 +48,7 @@ export default function BreadcumbComponent() {
 
   return (
     <div ref={breadcrumbContainerRef}>
-      <Breadcrumb spacing="1" separator={<ChevronRightIcon color="gray.500" />} fontWeight="thin" px={2}>
+      <Breadcrumb spacing="1" separator={<ChevronRightIcon color="gray.500" />} fontWeight="thin" px={4}>
         <BreadcrumbItem>
           <Link prefetch={false} href={"/"} _hover={{ textDecoration: "underline" }} color={`${color.MAIN_COLOR}.500`} fontWeight={"medium"}>
             Home
