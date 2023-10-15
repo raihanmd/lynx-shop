@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 
 export const myResponse = (statusCode, payload, message) => {
-  if (typeof payload === "string") {
-    payload = JSON.parse(payload);
-  }
 
   return NextResponse.json(
     {

@@ -33,13 +33,19 @@ function ProductTabs({ product }) {
       <TabIndicator mt="-2px" height="3px" bg={`${color.MAIN_COLOR}.500`} />
       <TabPanels pt={1}>
         <TabPanel>
-          <pre ref={textRef} style={isExpanded ? { overflow: "hidden", display: "-webkit-box" } : textStyles}>
+          {/* //! masih cara ngakalin!! */}
+          <pre ref={textRef} className="hidden" style={isExpanded ? { overflow: "hidden", display: "-webkit-box" } : textStyles}>
             {product.productDescription}
           </pre>
-          {showReadMoreButton && (
-            <Button variant={"link"} color={`${color.MAIN_COLOR}.500`} onClick={() => setIsExpanded((prev) => !prev)}>
-              {isExpanded ? "Read Less" : "Read More"}
-            </Button>
+          {showReadMoreButton ? (
+            <>
+              <pre style={isExpanded ? { overflow: "hidden", display: "-webkit-box" } : textStyles}>{product.productDescription}</pre>
+              <Button variant={"link"} color={`${color.MAIN_COLOR}.500`} onClick={() => setIsExpanded((prev) => !prev)}>
+                {isExpanded ? "Read Less" : "Read More"}
+              </Button>
+            </>
+          ) : (
+            <Text>{product.productDescription}</Text>
           )}
         </TabPanel>
         <TabPanel>
