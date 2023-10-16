@@ -70,10 +70,10 @@ export default function BreadcumbComponent() {
                 _hover={{ textDecoration: isLastItem ? "none" : "underline" }}
               >
                 {isLastItem ? (
-                  unslugify(path)
+                  path
                 ) : (
                   <Link href={`/${path}`} prefetch={false}>
-                    {unslugify(path)}
+                    {path}
                   </Link>
                 )}
               </Text>
