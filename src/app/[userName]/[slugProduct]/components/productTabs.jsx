@@ -24,7 +24,7 @@ function ProductTabs({ product }) {
   }, []);
 
   return (
-    <Tabs position="relative" variant="unstyled" size={"sm"} colorScheme="black">
+    <Tabs position="relative" variant="unstyled" size={"md"} colorScheme="black">
       <TabList borderBottom={"1px"} borderColor={"gray.200"}>
         <Tab fontWeight={"semibold"}>Description</Tab>
         <Tab fontWeight={"semibold"}>Information</Tab>
@@ -33,9 +33,9 @@ function ProductTabs({ product }) {
       <TabIndicator mt="-2px" height="3px" bg={`${color.MAIN_COLOR}.500`} />
       <TabPanels pt={1}>
         <TabPanel>
-          <pre ref={textRef} style={isExpanded ? { overflow: "hidden", display: "-webkit-box" } : textStyles}>
+          <Text ref={textRef} style={isExpanded ? { overflow: "hidden", display: "-webkit-box" } : textStyles}>
             {product.productDescription}
-          </pre>
+          </Text>
           {showReadMoreButton && (
             <Button variant={"link"} color={`${color.MAIN_COLOR}.500`} onClick={() => setIsExpanded((prev) => !prev)}>
               {isExpanded ? "Read Less" : "Read More"}
