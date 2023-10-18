@@ -22,6 +22,8 @@ export async function POST(req) {
     const { userName } = await getNameUserById(idUser);
     const userCart = await getCart(userName);
 
+    console.log(userCart);
+
     if (userCart.length > 0) {
       const prevCart = { idUser, idProduct, quantityProduct };
 

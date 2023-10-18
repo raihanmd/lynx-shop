@@ -1,11 +1,11 @@
 import { con } from "@/connection/db";
 
-export async function updateCart({ userId, productId, productQuantity }) {
+export async function updateCart({ idUser, idProduct, productQuantity }) {
   return await con
     .query(
       `UPDATE cart
         SET quantity = ${productQuantity}
-          WHERE id_user = '${userId}' AND id_products = '${productId}'`
+          WHERE id_user = '${idUser}' AND id_products = '${idProduct}'`
     )
     .then(([fields]) => {
       if (fields.affectedRows <= 0) {

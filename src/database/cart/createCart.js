@@ -1,6 +1,6 @@
 import { con } from "@/connection/db";
 
-export async function createCart({ cartId, userId, productId, productQuantity }) {
+export async function createCart({ idCart, idUser, idProduct, productQuantity }) {
   return await con
     .getConnection()
     .then(async (connection) => {
@@ -8,10 +8,9 @@ export async function createCart({ cartId, userId, productId, productQuantity })
       try {
         const [detailProduct = rows] = await connection.query(
           `SELECT p.price, 
-                  pd.quantity 
+                  p.quantity 
             FROM products AS p
-              INNER JOIN products_detail AS pd ON p.id = pd.id_products
-                WHERE p.id = '${productId}'`
+              WHERE p.id = '${idProduct}'`
         );
         if (detailProduct.length <= 0) {
           const err = new Error(`Forbidden.`);
@@ -31,7 +30,7 @@ export async function createCart({ cartId, userId, productId, productQuantity })
           .query(
             `INSERT INTO cart
                 (id, id_user, id_products, quantity)
-                  VALUES ('${cartId}', '${userId}', '${productId}', ${productQuantity})`
+                  VALUES ('${idCart}', '${idUser}', '${idProduct}', ${productQuantity})`
           )
           .then(([fields]) => {
             if (fields.affectedRows <= 0) {
