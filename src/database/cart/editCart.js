@@ -1,6 +1,6 @@
 import { con } from "@/connection/db";
 
-export async function editCart({ idCart, idUser, idProduct, productQuantity }) {
+export async function editCart({ idCart, idUser, idProduct, quantityProduct }) {
   return await con
     .getConnection()
     .then(async (connection) => {
@@ -19,7 +19,7 @@ export async function editCart({ idCart, idUser, idProduct, productQuantity }) {
           throw err;
         }
 
-        if (detailProduct[0].quantity < productQuantity) {
+        if (detailProduct[0].quantity < quantityProduct) {
           const err = new Error(`Bad request.`);
           err.statusCode = 400;
           err.payload = "Quantity of product is lesser than you try to order.";
@@ -29,7 +29,7 @@ export async function editCart({ idCart, idUser, idProduct, productQuantity }) {
         await connection
           .query(
             `UPDATE cart 
-                SET quantity = '${productQuantity}'
+                SET quantity = '${quantityProduct}'
                     WHERE id = '${idCart}' AND id_user = '${idUser}'`
           )
           .then(([fields]) => {

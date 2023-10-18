@@ -1,6 +1,6 @@
 import { con } from "@/connection/db";
 
-export async function createCart({ idCart, idUser, idProduct, productQuantity }) {
+export async function createCart({ idCart, idUser, idProduct, quantityProduct }) {
   return await con
     .getConnection()
     .then(async (connection) => {
@@ -19,7 +19,7 @@ export async function createCart({ idCart, idUser, idProduct, productQuantity })
           throw err;
         }
 
-        if (detailProduct[0].quantity < productQuantity) {
+        if (detailProduct[0].quantity < quantityProduct) {
           const err = new Error(`Bad request.`);
           err.statusCode = 400;
           err.payload = "Quantity of product is lesser than you try to order.";
@@ -30,7 +30,7 @@ export async function createCart({ idCart, idUser, idProduct, productQuantity })
           .query(
             `INSERT INTO cart
                 (id, id_user, id_products, quantity)
-                  VALUES ('${idCart}', '${idUser}', '${idProduct}', ${productQuantity})`
+                  VALUES ('${idCart}', '${idUser}', '${idProduct}', ${quantityProduct})`
           )
           .then(([fields]) => {
             if (fields.affectedRows <= 0) {
