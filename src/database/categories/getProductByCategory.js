@@ -19,7 +19,7 @@ export async function getProductByCategory(categoryName) {
               LEFT JOIN orders AS o ON o.id = od.id_orders
                 INNER JOIN user AS u ON u.id = p.id_user
                   INNER JOIN categories AS c ON c.id = p.id_categories
-                    WHERE c.id = '${categoryName}'
+                    WHERE c.name = '${categoryName}'
                       GROUP BY u.id, p.id, p.name, p.price, p.description
                         ORDER BY RAND()
                           LIMIT 24;`
