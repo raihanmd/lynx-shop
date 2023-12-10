@@ -21,7 +21,10 @@ export default async function AuthenticationCheck({ children }) {
 
   const {
     payload: { userId, userCity, userCityId },
-  } = await fetchGET(`/api/account/${slugify(session.user.name, { lower: true })}`, { component: "server" });
+  } = await fetchGET(
+    `/api/account/${slugify(session.user.name, { lower: true })}`,
+    { component: "server" }
+  );
 
   session.user.id = userId;
   session.user.city = userCity;

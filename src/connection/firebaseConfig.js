@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDoVLSbOS8I3IYYKWkkAtcouqx99yY_IdU",
-  authDomain: "ecomerce-bc524.firebaseapp.com",
-  projectId: "ecomerce-bc524",
-  storageBucket: "ecomerce-bc524.appspot.com",
-  messagingSenderId: "171969106692",
-  appId: "1:171969106692:web:00ef324f2d66b0307bb651",
-  measurementId: "G-FGNP8MTPMS",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
