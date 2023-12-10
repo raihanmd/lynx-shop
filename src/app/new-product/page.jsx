@@ -30,6 +30,7 @@ export default function page() {
   const [previewProductImageName, setPreviewProductImageName] = useState(null);
 
   const onSubmitProduct = async (data) => {
+    return console.log(data.desc);
     const imageProduct = generateImageName(data.image[0].name);
     try {
       setIsLoading(true);
@@ -120,7 +121,7 @@ export default function page() {
               </FormControl>
               <FormControl id="description" isRequired>
                 <FormLabel>Description Product</FormLabel>
-                <Textarea {...register("desc")} disabled={isLoading} type="text" name="desc" maxLength={65535} />
+                <Textarea {...register("desc")} disabled={isLoading} type="text" name="desc" maxLength={65535} rows={10} cols={1} />
               </FormControl>
               <FormControl id="category" isRequired>
                 <FormLabel>Category Product</FormLabel>
@@ -250,7 +251,7 @@ export default function page() {
         </Box>
       </Stack>
       <Flex mx={{ base: "auto", md: "0" }} w={{ base: "210px", md: "auto" }} align={{ base: "center", md: "start" }} direction={"column"}>
-        <ProductCard products={[{ productPrice: parseInt(previewProductPrice), productName: previewProductName, productImage: previewProductImage }]} preview={true} />
+        <ProductCard key={1} products={[{ productPrice: parseInt(previewProductPrice), productName: previewProductName, productImage: previewProductImage }]} preview={true} />
       </Flex>
     </Flex>
   );
