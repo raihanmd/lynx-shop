@@ -24,7 +24,7 @@ export async function POST(req) {
 
     if (userCart.length > 0) {
       const prevCart = { idUser, idProduct, quantityProduct };
-
+      //! handle jika user menambahkan quantity maka quantity current + quantity tambahan user
       await updateCart(prevCart);
 
       return myResponse(200, { isSucceed: 1 }, `Cart updated successfully.`);

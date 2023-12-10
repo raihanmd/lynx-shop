@@ -8,7 +8,7 @@ import { CategoriesProvider } from "@/context/CategoriesContext";
 import MyNavbar from "./myNavbar";
 
 export default async function AuthenticationCheck({ children }) {
-  const categories = await fetchGET("/api/category");
+  const categories = await fetchGET("/category");
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -21,7 +21,10 @@ export default async function AuthenticationCheck({ children }) {
 
   const {
     payload: { userId, userCity, userCityId },
-  } = await fetchGET(`/api/account/${slugify(session.user.name, { lower: true })}`, { component: "server" });
+  } = await fetchGET(
+    `/account/${slugify(session.user.name, { lower: true })}`,
+    { component: "server" }
+  );
 
   session.user.id = userId;
   session.user.city = userCity;

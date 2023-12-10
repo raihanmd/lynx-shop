@@ -1,37 +1,28 @@
 "use client";
 
 import { Suspense } from "react";
-import { Link, Popover, PopoverContent, PopoverTrigger, Stack, Text, Box } from "@chakra-ui/react";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link, Popover, PopoverContent, PopoverTrigger, Stack, Text, Box, Icon, Flex, PopoverArrow, PopoverCloseButton, PopoverHeader, PopoverBody, Badge } from "@chakra-ui/react";
 
-import { useCategoriesContext } from "@/context/CategoriesContext";
-
-const DesktopNav = () => {
-  const categories = useCategoriesContext();
-
+const Cart = () => {
   return (
-    <Stack direction={"row"} spacing={4} align={"center"}>
-      <Box key={"Categories"}>
-        <Popover trigger={"hover"} placement={"bottom-start"}>
+    <Stack direction={"row"} spacing={"4"} align={"center"}>
+      <Box key={"Cart"}>
+        <Popover trigger={"click"}>
           <PopoverTrigger>
-            <Text
-              p={2}
-              fontSize={"sm"}
-              fontWeight={500}
-              color={"gray.600"}
-              _hover={{
-                cursor: "pointer",
-                textDecoration: "none",
-                color: "gray.800",
-              }}
-            >
-              Categories
-            </Text>
+            <Flex p={"1"} shadow={"full"} rounded={"full"} justify={"center"} align={"center"} _hover={{ cursor: "pointer" }} pos={"relative"}>
+              <Icon as={AiOutlineShoppingCart} boxSize={"6"} color={"black"} />
+              <Box w={"3"} h={"3"} rounded={"full"} bg={"red.500"} pos={"absolute"} top={"0"} right={"0"} borderColor={"white"} borderWidth={"medium"} />
+            </Flex>
           </PopoverTrigger>
           <Suspense fallback={<LoadingPopoverCategories />}>
             <PopoverContent border={0} boxShadow={"lg"} bg={"white"} p={3} rounded={"xl"} minW={"xs"} color={"black"}>
-              {categories.map((category) => (
-                <DesktopSubNav key={category.name} {...category} />
-              ))}
+              <PopoverArrow />
+              <PopoverHeader>Cart</PopoverHeader>
+              <PopoverCloseButton />
+              <PopoverBody>
+                <Text>Hello</Text>
+              </PopoverBody>
             </PopoverContent>
           </Suspense>
         </Popover>
@@ -64,4 +55,4 @@ const LoadingPopoverCategories = () => {
   );
 };
 
-export default DesktopNav;
+export default Cart;

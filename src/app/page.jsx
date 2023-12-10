@@ -5,7 +5,7 @@ import { fetchGET } from "@/utils/fetchGET";
 import LoadingProduct from "./components/loadingProduct";
 
 export default async function page() {
-  const products = await fetchGET("/api/products", { component: "server" });
+  const products = await fetchGET("/product", { component: "server" });
   return (
     <>
       <Suspense fallback={<LoadingProduct />}>

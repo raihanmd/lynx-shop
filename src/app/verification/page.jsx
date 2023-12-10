@@ -3,7 +3,20 @@
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { redirect } from "next/navigation";
-import { Stack, FormControl, FormLabel, Select, Button, Flex, Box, useToast, Alert, AlertIcon, AlertTitle, Textarea } from "@chakra-ui/react";
+import {
+  Stack,
+  FormControl,
+  FormLabel,
+  Select,
+  Button,
+  Flex,
+  Box,
+  useToast,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  Textarea,
+} from "@chakra-ui/react";
 
 import { useUserContext } from "@/context/UserContext";
 import { fetchGET } from "@/utils/fetchGET";
@@ -33,7 +46,9 @@ export default function page() {
     const fetchProvinces = async () => {
       try {
         setIsLoading(true);
-        const { payload } = await fetchGET("/api/rajaongkir/province", { component: "client" });
+        const { payload } = await fetchGET("/province", {
+          component: "client",
+        });
         setProvinces(payload);
         setIsLoading(false);
       } catch (error) {
@@ -55,7 +70,9 @@ export default function page() {
     const fetchCities = async () => {
       try {
         setIsLoading(true);
-        const { payload } = await fetchGET(`/api/rajaongkir/city/${selectedProvinceId}`, { component: "client" });
+        const { payload } = await fetchGET(`/city/${selectedProvinceId}`, {
+          component: "client",
+        });
         setCities(payload);
         setIsLoading(false);
       } catch (error) {
@@ -74,11 +91,15 @@ export default function page() {
 
   const handleProvinceChange = async (e) => {
     setSelectedProvinceId(e.target.value);
-    setSelectedProvinceName(e.target.options[e.target.selectedIndex].getAttribute("data-province"));
+    setSelectedProvinceName(
+      e.target.options[e.target.selectedIndex].getAttribute("data-province")
+    );
 
     if (selectedProvinceId) {
       try {
-        const { payload } = await fetchGET(`/api/rajaongkir/city/${selectedProvinceId}`, { component: "client" });
+        const { payload } = await fetchGET(`/city/${selectedProvinceId}`, {
+          component: "client",
+        });
         setCities(payload);
       } catch (error) {
         toast({
@@ -109,7 +130,9 @@ export default function page() {
         userShopDesc: data.shopDesc,
       };
 
-      const { statusCode } = await fetchPOST("/api/verification", formData, { component: "client" });
+      const { statusCode } = await fetchPOST("/verification", formData, {
+        component: "client",
+      });
 
       if (statusCode !== 200) throw new Error();
       toast({
@@ -134,8 +157,20 @@ export default function page() {
   };
 
   return (
-    <Flex maxW={"7xl"} minH={"100%"} py={"10"} justify={"center"} direction={{ base: "column-reverse", md: "row" }}>
-      <Stack spacing={8} w={{ base: "auto", sm: "md", md: "xl" }} px={6} mx={{ base: "auto", md: "0" }} mt={{ base: "5", md: "0" }}>
+    <Flex
+      maxW={"7xl"}
+      minH={"100%"}
+      py={"10"}
+      justify={"center"}
+      direction={{ base: "column-reverse", md: "row" }}
+    >
+      <Stack
+        spacing={8}
+        w={{ base: "auto", sm: "md", md: "xl" }}
+        px={6}
+        mx={{ base: "auto", md: "0" }}
+        mt={{ base: "5", md: "0" }}
+      >
         {isError ? (
           <Alert status="error">
             <AlertIcon />
@@ -152,17 +187,36 @@ export default function page() {
             <Stack spacing={4}>
               <FormControl id="bio" isRequired>
                 <FormLabel>Bio</FormLabel>
-                <Textarea {...register("bio")} type="text" placeholder="Some epic bio..." maxLength={50} />
+                <Textarea
+                  {...register("bio")}
+                  type="text"
+                  placeholder="Some epic bio..."
+                  maxLength={50}
+                />
               </FormControl>
               <FormControl id="shopDesc" isRequired>
                 <FormLabel>Shop Description</FormLabel>
-                <Textarea {...register("shopDesc")} type="text" placeholder="Awesome shop description..." maxLength={255} />
+                <Textarea
+                  {...register("shopDesc")}
+                  type="text"
+                  placeholder="Awesome shop description..."
+                  maxLength={255}
+                />
               </FormControl>
               <FormControl id="province" isRequired>
                 <FormLabel>Your Province</FormLabel>
-                <Select {...register("province")} placeholder={"Select Your Province"} onChange={handleProvinceChange} onActive={{ borderColor: "black" }}>
+                <Select
+                  {...register("province")}
+                  placeholder={"Select Your Province"}
+                  onChange={handleProvinceChange}
+                  onActive={{ borderColor: "black" }}
+                >
                   {provinces.map((province) => (
-                    <option key={`province-option-${province.province_id}`} data-province={province.province} value={province.province_id}>
+                    <option
+                      key={`province-option-${province.province_id}`}
+                      data-province={province.province}
+                      value={province.province_id}
+                    >
                       {province.province}
                     </option>
                   ))}
@@ -173,12 +227,22 @@ export default function page() {
                 <Select
                   {...register("city")}
                   placeholder={isLoading ? "Loading..." : "Select Your City"}
-                  onChange={(e) => setSelectedCityName(e.target.options[e.target.selectedIndex].getAttribute("data-city"))}
+                  onChange={(e) =>
+                    setSelectedCityName(
+                      e.target.options[e.target.selectedIndex].getAttribute(
+                        "data-city"
+                      )
+                    )
+                  }
                   onActive={{ borderColor: "black" }}
                   isDisabled={!selectedProvinceId || isLoading}
                 >
                   {cities.map((city) => (
-                    <option key={`city-option-${city.city_id}`} value={city.city_id} data-city={city.city_name}>
+                    <option
+                      key={`city-option-${city.city_id}`}
+                      value={city.city_id}
+                      data-city={city.city_name}
+                    >
                       {city.city_name}
                     </option>
                   ))}

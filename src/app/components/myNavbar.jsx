@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Link } from "@chakra-ui/next-js";
 import { BiLogOut } from "react-icons/bi";
 import { signOut } from "next-auth/react";
 import { VscAccount } from "react-icons/vsc";
@@ -11,11 +12,11 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { useRef, useState } from "react";
 import { Box, Flex, Text, Button, Input, InputGroup, InputRightAddon, Menu, Avatar, MenuList, MenuItem, MenuDivider, MenuButton, Icon } from "@chakra-ui/react";
 
+import { useUserContext } from "@/context/UserContext";
 import logoBrand from "@/images/lynxshop.webp";
 import DesktopNav from "./desktopNav";
-import { useUserContext } from "@/context/UserContext";
 import color from "@/const/color";
-import { Link } from "@chakra-ui/next-js";
+import Cart from "./cart";
 
 const searchProduct = (product) => {
   console.log(product);
@@ -79,37 +80,40 @@ export default function MyNavbar() {
         </Flex>
 
         {user ? (
-          <Menu>
-            <MenuButton as={Button} rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
-              <Avatar size={"sm"} src={user.image} alt={`Picture of ${user.name}`} />
-            </MenuButton>
-            <MenuList color={"black"}>
-              <MenuItem _hover={{ background: `${color.MAIN_COLOR}.50` }} _focus={{ background: `${color.MAIN_COLOR}.50` }}>
-                <Link w={"full"} href={user.city ? "/new-product" : "/verification"} _hover={{ textDecoration: "none" }} prefetch={false}>
-                  <Flex w={"full"} justify={"space-between"} align={"center"}>
-                    <Text textDecor={"none"}>{user.city ? "Add Product" : "Verify My Account"}</Text>
-                    <Icon fontSize={"lg"} as={user.city ? GrAddCircle : MdOutlineVerified} />
-                  </Flex>
-                </Link>
-              </MenuItem>
-              {MENU_ITEM.map((item) => (
-                <MenuItem key={item.key} _hover={{ background: `${color.MAIN_COLOR}.50` }}>
-                  <Link w={"full"} href={item.href} _hover={{ textDecoration: "none" }} prefetch={false}>
+          <Flex gap={"2"}>
+            <Cart />
+            <Menu>
+              <MenuButton as={Button} rounded={"full"} variant={"link"} cursor={"pointer"} minW={0}>
+                <Avatar size={"sm"} src={user.image} alt={`Picture of ${user.name}`} />
+              </MenuButton>
+              <MenuList color={"black"}>
+                <MenuItem _hover={{ background: `${color.MAIN_COLOR}.50` }} _focus={{ background: `${color.MAIN_COLOR}.50` }}>
+                  <Link w={"full"} href={user.city ? "/new-product" : "/verification"} _hover={{ textDecoration: "none" }} prefetch={false}>
                     <Flex w={"full"} justify={"space-between"} align={"center"}>
-                      <Text textDecor={"none"}>{item.label}</Text>
-                      <Icon fontSize={"lg"} as={item.icon} />
+                      <Text textDecor={"none"}>{user.city ? "Add Product" : "Verify My Account"}</Text>
+                      <Icon fontSize={"lg"} as={user.city ? GrAddCircle : MdOutlineVerified} />
                     </Flex>
                   </Link>
                 </MenuItem>
-              ))}
-              <MenuDivider />
-              <MenuItem onClick={handleLogout} _hover={{ background: `${color.MAIN_COLOR}.50` }}>
-                <Flex w={"full"} justify={"space-between"} align={"center"}>
-                  Log out <Icon fontSize={"lg"} as={BiLogOut} />
-                </Flex>
-              </MenuItem>
-            </MenuList>
-          </Menu>
+                {MENU_ITEM.map((item, i) => (
+                  <MenuItem key={i} _hover={{ background: `${color.MAIN_COLOR}.50` }}>
+                    <Link w={"full"} href={item.href} _hover={{ textDecoration: "none" }} prefetch={false}>
+                      <Flex w={"full"} justify={"space-between"} align={"center"}>
+                        <Text textDecor={"none"}>{item.label}</Text>
+                        <Icon fontSize={"lg"} as={item.icon} />
+                      </Flex>
+                    </Link>
+                  </MenuItem>
+                ))}
+                <MenuDivider />
+                <MenuItem onClick={handleLogout} _hover={{ background: `${color.MAIN_COLOR}.50` }}>
+                  <Flex w={"full"} justify={"space-between"} align={"center"}>
+                    Log out <Icon fontSize={"lg"} as={BiLogOut} />
+                  </Flex>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>
         ) : (
           <Button
             as={"a"}
@@ -132,13 +136,11 @@ export default function MyNavbar() {
 
 const MENU_ITEM = [
   {
-    key: 1,
     label: "My Account",
     icon: VscAccount,
     href: "/account",
   },
   {
-    key: 2,
     label: "Setting",
     icon: LuSettings,
     href: "/setting",

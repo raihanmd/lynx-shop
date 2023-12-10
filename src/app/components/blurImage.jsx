@@ -23,7 +23,7 @@ const BlurImage = ({ imageUrl, blurhash }) => {
           <Blurhash hash={blurhash} width="100%" height="100%" />
         </Box>
       ) : (
-        <Image loading="lazy" src={imageUrl} alt={`Picture of ${imageUrl}`} layout="responsive" width={300} height={192} style={{ objectFit: "cover", maxHeight: "192px", maxWidth: "300px" }} />
+        <Image loading="lazy" src={imageUrl} alt={`Picture of ${imageUrl}`} layout="responsive" width={300} height={192} style={{ width: "auto", height: "auto", objectFit: "cover", maxHeight: "192px", maxWidth: "300px" }} />
       )}
     </>
   );

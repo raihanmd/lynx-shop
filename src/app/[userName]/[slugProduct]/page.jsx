@@ -7,7 +7,10 @@ import ProductDetails from "./components/productDetails";
 import LoadingProductDetail from "./loading";
 
 export default async function Page({ params }) {
-  const detailProduct = await fetchGET(`/api/${params.userName}/${params.slugProduct}`, { component: "server" });
+  const detailProduct = await fetchGET(
+    `/${params.userName}/${params.slugProduct}`,
+    { component: "server" }
+  );
 
   if (detailProduct.statusCode !== 200) {
     notFound();
