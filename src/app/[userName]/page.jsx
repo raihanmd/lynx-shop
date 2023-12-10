@@ -8,7 +8,7 @@ import UserBanner from "./components/userBanner";
 import UserTab from "./components/userTab";
 
 export default async function page({ params }) {
-  const userPage = await fetchGET(`/api/${params.userName}`, { component: "server" });
+  const userPage = await fetchGET(`/${params.userName}`, { component: "server" });
 
   if (userPage.statusCode !== 200) {
     notFound();

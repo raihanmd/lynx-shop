@@ -4,7 +4,25 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { AiOutlineFileImage } from "react-icons/ai";
-import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, Text, useToast, Alert, AlertIcon, AlertTitle, Select, VisuallyHidden, Icon, chakra, Textarea } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Button,
+  Text,
+  useToast,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  Select,
+  VisuallyHidden,
+  Icon,
+  chakra,
+  Textarea,
+} from "@chakra-ui/react";
 
 import ProductCard from "@/app/components/productCard";
 import { fetchPOST } from "@/utils/fetchPOST";
@@ -43,7 +61,11 @@ export default function page() {
         throw err;
       });
 
-      const blurhashResponse = await fetchPOST("/api/blurhash", { productImage }, { component: "client" });
+      const blurhashResponse = await fetchPOST(
+        "/blurhash",
+        { productImage },
+        { component: "client" }
+      );
 
       if (blurhashResponse.statusCode !== 200) throw new Error();
 
@@ -58,7 +80,9 @@ export default function page() {
         productImage,
         blurhash: blurhashResponse.payload.blurhash,
       };
-      const { statusCode } = await fetchPOST("/api/products", newProduct, { component: "client" });
+      const { statusCode } = await fetchPOST("/product", newProduct, {
+        component: "client",
+      });
 
       if (statusCode !== 200) throw new Error();
       toast({
@@ -91,8 +115,20 @@ export default function page() {
   };
 
   return (
-    <Flex maxW={"7xl"} minH={"100%"} py={"10"} justify={"center"} direction={{ base: "column-reverse", md: "row" }}>
-      <Stack spacing={8} w={"auto"} px={6} mx={{ base: "auto", md: "0" }} mt={{ base: "5", md: "0" }}>
+    <Flex
+      maxW={"7xl"}
+      minH={"100%"}
+      py={"10"}
+      justify={"center"}
+      direction={{ base: "column-reverse", md: "row" }}
+    >
+      <Stack
+        spacing={8}
+        w={"auto"}
+        px={6}
+        mx={{ base: "auto", md: "0" }}
+        mt={{ base: "5", md: "0" }}
+      >
         {isError ? (
           <Alert status="error">
             <AlertIcon />
@@ -121,11 +157,24 @@ export default function page() {
               </FormControl>
               <FormControl id="description" isRequired>
                 <FormLabel>Description Product</FormLabel>
-                <Textarea {...register("desc")} disabled={isLoading} type="text" name="desc" maxLength={65535} rows={10} cols={1} />
+                <Textarea
+                  {...register("desc")}
+                  disabled={isLoading}
+                  type="text"
+                  name="desc"
+                  maxLength={65535}
+                  rows={10}
+                  cols={1}
+                />
               </FormControl>
               <FormControl id="category" isRequired>
                 <FormLabel>Category Product</FormLabel>
-                <Select {...register("cat")} disabled={isLoading} placeholder="Select Category" name="cat">
+                <Select
+                  {...register("cat")}
+                  disabled={isLoading}
+                  placeholder="Select Category"
+                  name="cat"
+                >
                   {categories.map((category) => (
                     <option value={category.name}>{category.name}</option>
                   ))}
@@ -133,25 +182,76 @@ export default function page() {
               </FormControl>
               <FormControl id="price" isRequired>
                 <FormLabel>Price Product</FormLabel>
-                <Input {...register("price")} disabled={isLoading} type="number" name="price" value={previewProductPrice} onChange={(e) => setPreviewProductPrice(parseFloat(e.target.value))} max={999999999999999999} />
+                <Input
+                  {...register("price")}
+                  disabled={isLoading}
+                  type="number"
+                  name="price"
+                  value={previewProductPrice}
+                  onChange={(e) =>
+                    setPreviewProductPrice(parseFloat(e.target.value))
+                  }
+                  max={999999999999999999}
+                />
               </FormControl>
               <FormControl id="quantity" isRequired>
                 <FormLabel>Quantity Product</FormLabel>
-                <Input {...register("qty")} disabled={isLoading} type="number" name="qty" max={999999999} />
+                <Input
+                  {...register("qty")}
+                  disabled={isLoading}
+                  type="number"
+                  name="qty"
+                  max={999999999}
+                />
               </FormControl>
               <FormControl id="quantity" isRequired>
                 <FormLabel>Weight Product</FormLabel>
-                <Input {...register("weight")} disabled={isLoading} type="number" name="weight" max={999999999} />
+                <Input
+                  {...register("weight")}
+                  disabled={isLoading}
+                  type="number"
+                  name="weight"
+                  max={999999999}
+                />
               </FormControl>
 
-              <FormControl w={{ sm: "350px", md: "430px" }} id="image" isRequired>
+              <FormControl
+                w={{ sm: "350px", md: "430px" }}
+                id="image"
+                isRequired
+              >
                 <FormLabel>Image Product</FormLabel>
-                <Flex className="testParent" mt={1} justify="center" px={6} pt={5} pb={6} borderWidth={2} borderStyle="dashed" rounded="md" position={"relative"}>
-                  <Stack spacing={1} className="test" direction={previewProductImage ? "row" : "column"} textAlign={"center"} align={"center"} justify={"baseline"}>
+                <Flex
+                  className="testParent"
+                  mt={1}
+                  justify="center"
+                  px={6}
+                  pt={5}
+                  pb={6}
+                  borderWidth={2}
+                  borderStyle="dashed"
+                  rounded="md"
+                  position={"relative"}
+                >
+                  <Stack
+                    spacing={1}
+                    className="test"
+                    direction={previewProductImage ? "row" : "column"}
+                    textAlign={"center"}
+                    align={"center"}
+                    justify={"baseline"}
+                  >
                     {previewProductImage ? (
                       <Icon as={AiOutlineFileImage} boxSize={8} />
                     ) : (
-                      <Icon boxSize={12} color="gray.400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                      <Icon
+                        boxSize={12}
+                        color="gray.400"
+                        stroke="currentColor"
+                        fill="none"
+                        viewBox="0 0 48 48"
+                        aria-hidden="true"
+                      >
                         <path
                           d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                           strokeWidth="2"
@@ -160,7 +260,12 @@ export default function page() {
                         />
                       </Icon>
                     )}
-                    <Flex fontSize="sm" color="gray.600" alignItems="center" justify={"center"}>
+                    <Flex
+                      fontSize="sm"
+                      color="gray.600"
+                      alignItems="center"
+                      justify={"center"}
+                    >
                       <chakra.label
                         whiteSpace={"nowrap"}
                         maxW={"250px"}
@@ -175,8 +280,13 @@ export default function page() {
                           textDecor: "underline",
                         }}
                       >
-                        <Text overflow={"hidden"} textOverflow={"ellipsis"} whiteSpace={"nowrap"}>
-                          {previewProductImageName || "Browse and upload a file"}
+                        <Text
+                          overflow={"hidden"}
+                          textOverflow={"ellipsis"}
+                          whiteSpace={"nowrap"}
+                        >
+                          {previewProductImageName ||
+                            "Browse and upload a file"}
                         </Text>
                         <VisuallyHidden>
                           <Input
@@ -191,14 +301,17 @@ export default function page() {
                                 if (files[0].size > 1000000) {
                                   return toast({
                                     title: "Image size too big.",
-                                    description: "Sorry the developer doesn't want to spend money, so he selected a hobby plan with modest specs.",
+                                    description:
+                                      "Sorry the developer doesn't want to spend money, so he selected a hobby plan with modest specs.",
                                     position: "top-right",
                                     status: "error",
                                     isClosable: true,
                                   });
                                 }
                                 setPreviewProductImageName(files[0].name);
-                                setPreviewProductImage(URL.createObjectURL(files[0]));
+                                setPreviewProductImage(
+                                  URL.createObjectURL(files[0])
+                                );
                               }
                             }}
                           />
@@ -250,8 +363,23 @@ export default function page() {
           </form>
         </Box>
       </Stack>
-      <Flex mx={{ base: "auto", md: "0" }} w={{ base: "210px", md: "auto" }} align={{ base: "center", md: "start" }} direction={"column"}>
-        <ProductCard key={1} products={[{ productPrice: parseInt(previewProductPrice), productName: previewProductName, productImage: previewProductImage }]} preview={true} />
+      <Flex
+        mx={{ base: "auto", md: "0" }}
+        w={{ base: "210px", md: "auto" }}
+        align={{ base: "center", md: "start" }}
+        direction={"column"}
+      >
+        <ProductCard
+          key={1}
+          products={[
+            {
+              productPrice: parseInt(previewProductPrice),
+              productName: previewProductName,
+              productImage: previewProductImage,
+            },
+          ]}
+          preview={true}
+        />
       </Flex>
     </Flex>
   );
